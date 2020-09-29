@@ -13,16 +13,20 @@ import { useRegisterMutation } from "../generated/graphql";
 import { ErrorMap } from "../utilis/toErrormap";
 import { useRouter } from 'next/router'
 import {Tes} from './styles'
+import { useMediaQuery } from 'react-responsive'
+
 interface registerProps {}
 
-const REGISTER_MUT = `
 
-`;
 const Register: React.FC<registerProps> = ({}) => {
   const router = useRouter()
 
   const [,register] = useRegisterMutation();
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(max-device-width: 1224px)'
+  })
   return (
+    
   
     <Wrapper variant="small">
       <Head>
@@ -42,7 +46,10 @@ const Register: React.FC<registerProps> = ({}) => {
       >
         {({ isSubmitting }) => (
           <Form>
-            <Tes>Login</Tes>
+            {
+              isDesktopOrLaptop &&  <Tes>Login</Tes>
+
+            }
             <InputField
               name="username"
               placeholder="username"
